@@ -64,11 +64,19 @@ const menuArray = [
     description: `on it tumblr kickstarter thundercats migas everyday carry squid palo santo leggings. Food truck truffaut  `,
   }
 ];
-
+// define all required consts
 const menuContainer = document.querySelector(".menu-container");
+const allBtn = document.getElementById("all");
+const breakfastBtn = document.getElementById("breakfast");
+const lunchBtn = document.getElementById("lunch");
+const shakesBtn = document.getElementById("shakes");
+//render menu on the screen
 window.addEventListener("DOMContentLoaded", function () {
-  let showMenuItems = menuArray.map(function (item) {
-
+  displayMenu(menuArray);
+});
+//create function for rendering menu items on the screen
+function displayMenu (array) {
+  let showMenuItems = array.map(function (item) {
     return `<article class="menu-item">
           <img src=${item.img} alt=${item.title} class="item-image" />
           <div class="item-info">
@@ -81,9 +89,43 @@ window.addEventListener("DOMContentLoaded", function () {
             </p>
           </div>
         </article>`;
-
   });
-  showMenuItems = showMenuItems.join("");
-
+  showMenuItems = showMenuItems.join(""); 
   menuContainer.innerHTML = showMenuItems;
-});
+}
+//listen to all buttons
+allBtn.addEventListener("click", showAll);
+breakfastBtn.addEventListener("click", showBreakfast);
+lunchBtn.addEventListener("click", showLanch);
+shakesBtn.addEventListener("click", showShakes);
+//show all menu items
+function showAll() {
+  displayMenu(menuArray);
+}
+//show breakfast items
+function showBreakfast() {
+  let breakfastItem = menuArray.filter(function(el){
+    if(el.category === "breakfast"){
+      return el
+    }
+    });
+    return displayMenu(breakfastItem);
+}
+//show lunch items
+function showLanch() {
+  let lunchItem = menuArray.filter(function(el){
+    if(el.category === "lunch"){
+      return el
+    }
+    });
+    return displayMenu(lunchItem);
+}
+//show shakes items
+function showShakes() {
+  let shakesItem = menuArray.filter(function(el){
+    if(el.category === "shakes"){
+      return el
+    }
+    });
+    return displayMenu(shakesItem);
+}
